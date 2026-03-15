@@ -36,12 +36,15 @@
           src="#model" 
           position="0 0 0" 
           rotation="0 -90 -90"
-          scale="0 0 0"
-          animation="property: scale; to: 0.3 0.3 0.3; dur: 1000; startEvents: found; easing: easeOutElastic">
+          scale="0.3 0.3 0.3"
+          
+          animation__entrar="property: scale; to: 0.3 0.3 0.3; dur: 800; easing: easeOutElastic; startEvents: targetFound;"
+    
+          animation__salir="property: scale; to: 0 0 0; dur: 300; easing: easeInQuad; startEvents: targetLost;">
         </a-gltf-model>
 
         <a-plane 
-          color="blue" 
+          color="red" 
           opacity="0.5" 
           position="0 0 0" 
           height="1" 
@@ -50,20 +53,6 @@
         </a-plane>
         
       </a-entity>
-      
-      <script>
-        const target = document.querySelector('#myTarget');
-        const zorro = document.querySelector('#zorro');
-      
-        target.addEventListener("targetFound", () => {
-          zorro.setAttribute('animation', 'property: scale; to: 0.3 0.3 0.3; dur: 1000; startEvents: none');
-        });
-      
-        target.addEventListener("targetLost", () => {
-          // Animación de salida: reducimos a escala 0 antes de ocultar
-          zorro.setAttribute('animation', 'property: scale; to: 0 0 0; dur: 500; easing: easeInQuad');
-        });
-      </script>
       
     </a-scene>
   </body>
