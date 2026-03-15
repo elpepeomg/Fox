@@ -60,14 +60,39 @@
         
       </a-entity>
     </a-scene>
+    
+    <div id="debug-log" style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: lime; padding: 10px; border-radius: 5px; font-family: monospace; z-index: 9999; pointer-events: none;">
+  Esperando clic...
+    </div>
 
     <script>
-      // Esperamos a que la escena cargue completamente
+      const logDiv = document.querySelector('#debug-log');
+      
+      // Función para escribir en pantalla
+      function log(msg) {
+        logDiv.innerHTML = msg;
+        console.log(msg); // Por si acaso conectas la PC después
+      }
+    
       document.querySelector('a-scene').addEventListener('loaded', function () {
-        document.querySelector('#boton-invisible').addEventListener('click', function (evt) {
+        const cubo = document.querySelector('#boton-invisible');
+        
+        log("Escena cargada. Toca el cubo rojo.");
+    
+        // Detectar clic en el cubo
+        cubo.addEventListener('click', function (evt) {
+          log("¡ÉXITO! Clic en el cubo.");
           window.open('https://www.instagram.com/poxi_bran?igsh=Yzhnc3A4MGs4b3N3', '_blank');
+        });
+    
+        // Detectar si tocamos cualquier otra cosa
+        document.addEventListener('click', function(evt) {
+          if (evt.target.id !== 'boton-invisible') {
+            log("Tocaste: " + evt.target.tagName);
+          }
         });
       });
     </script>
+
 </body>
 </html>
